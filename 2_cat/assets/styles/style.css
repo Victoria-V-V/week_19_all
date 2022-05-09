@@ -1,13 +1,11 @@
-.container {
-    padding: 10px;
+input:required:valid {
+    border-color: green;
 }
 
-.addButton {
-    margin-top: 10px;
-}
-
-#notes {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 5px;
+.button {
+    border: 1px solid grey;
+    width: max-content;
+    font-size: 24px;
+    font-weight: bold;
+    background-color: lightgray;
 }
