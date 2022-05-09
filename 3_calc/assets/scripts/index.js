@@ -1,74 +1,48 @@
-// для хранения и получения данных в localStorage (т.к. все данные - это строки!):
-// JSON.stringify для преобразования объектов в JSON.
-// JSON.parse для преобразования JSON обратно в объект.
-//источник https://itchef.ru/articles/72326/
-
-
-//получение значений из локального хранилища при загрузке страницы
-document.addEventListener("DOMContentLoaded", displayNotes);
-
-//добавление данных в хранилище
-const addButton = document.querySelector('.addButton');
-addButton.addEventListener("click", addNotes);
-
-function addNotes() {
-    let addNote = document.querySelector('#addNote');
-
-    //если в хранилище нет данных, массив пустой
-    if (localStorage.getItem('notes') == null) {
-        notes = [];
-    } else {
-        //иначе преобразуем в массив
-        notes = JSON.parse(localStorage.getItem('notes'));
+class Calculator {
+    static add(number1, number2) {
+        return number1 + number2;
     }
 
-    if (addNote.value !== '') {
-        notes.push(addNote.value);
-    }
-    localStorage.setItem('notes', JSON.stringify(notes));
-    addNote.value = '';
-    displayNotes();
-}
-
-//вывод данных из хранилища в виде заметок
-function displayNotes() {
-    let notes;
-    if (localStorage.getItem('notes') == null) {
-        notes = [];
-    } else {
-        notes = JSON.parse(localStorage.getItem('notes'));
+    static subtract(number1, number2) {
+        return number1 - number2;
     }
 
-    let html = '';
-    //перебираем массив, рисуем карточку, добавляет индекс элемента, по которому потом будем удалять
-    notes.forEach(function (element, index) {
-        html += `
-        <div class="card" style="width: 18rem;">
-        <div class="card-body">
-            <p class="card-text">${element}</p>
-            <button class="btn btn-sm btn-danger deleteButton" id="${index}" onclick=deleteNote(this.id)>Удалить</button>
-        </div>
-    </div>`;
-    });
+    static divide(number1, number2) {
+        if (!number2) {
+            return "На ноль делить нельзя!";
+        } else {
+            return number1 / number2;
+        }
+    }
 
-    let note = document.querySelector('#notes');
-    if (notes.length != 0) {
-        note.innerHTML = html;
-    } else {
-        note.innerHTML = '';
+    static multiplay(number1, number2) {
+        return number1 * number2;
     }
 }
 
-//удаляем карточки с заметками
-function deleteNote(index) {
-    let notes;
-    if (localStorage.getItem('notes') == null) {
-        notes = [];
-    } else {
-        notes = JSON.parse(localStorage.getItem('notes'));
-    }
+const button = document.querySelector(".button");
+button.addEventListener("click", operation);
 
-    notes.splice(index, 1);
-    localStorage.setItem('notes', JSON.stringify(notes));
-    displayNotes();
+function operation() {
+    let number1 = Number(document.querySelector('#number1').value);
+    let number2 = Number(document.querySelector('#number2').value);
+    let result = document.querySelector('#result');
+
+    switch (operator) {
+        case '+':
+            result.innerHTML = Calculator.add(number1, number2);
+            break;
+
+        case '-':
+            result.innerHTML = Calculator.subtract(number1, number2);
+            break;
+
+        case '*':
+            result.innerHTML = Calculator.multiplay(number1, number2);
+            break;
+
+        case '/':
+            result.innerHTML = Calculator.divide(number1, number2);
+            break;
+    }
 }

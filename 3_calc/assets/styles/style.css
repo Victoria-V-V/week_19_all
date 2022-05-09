@@ -1,13 +1,22 @@
-.container {
-    padding: 10px;
+.hometask {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 10px;
+    margin-bottom: 40px;
 }
 
-.addButton {
-    margin-top: 10px;
-}
-
-#notes {
+.calculator {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 5px;
+    grid-template-columns: repeat(2, 75px);
+    gap: 10px;
+}
+
+.calculator>button {
+    font-size: 50px;
+}
+
+#result {
+    border-bottom: 1px solid red;
+    font-weight: bold;
 }
